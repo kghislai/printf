@@ -106,6 +106,12 @@ void	ft_putnbr(int n)
 	else
 		ft_putchar(n + '0');
 }
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 int flags(char flag, char *search)
 {
     while (*search)
@@ -116,15 +122,29 @@ int flags(char flag, char *search)
     }
     return (0);
 }
+int ft_accuracy(char *f, int d_i)
+{
+    int i;
 
+    i = 0;
+    while (f[i] == '.')
+        i++;
+    while (ft_isdigit(f[i]))
+        f[i++];
+        
+    return (0);
+}
 void    ft_print_d(char *f, int d_i)
 {
     int i;
     int l_justfy;
     int force_pos;
+    int accuracy;
 
+    accuracy = flags('.', f);
     l_justfy = flags('-', f);
-    force_pos = flags('+', f);
+    force_pos = flags('+', f);  
+    
     i = atoi(f + (l_justfy + force_pos));
     if (l_justfy)
     {
@@ -200,8 +220,9 @@ void    my_printf(char *format, ...)
 
 int     main(void)
 {
-    printf("|%9d|%c|%s|%x\n\n",1588,'q',"Hello", 57790);
-    my_printf("|%9d|%c|%s|%x\n\n",1588,'q',"Hello", 57790);
+    int i = 0;
+    printf("|%9.7d|%c|%s|%x|%p\n\n",1588,'q',"Hello", 57790, &i);
+    my_printf("|%9.7d|%c|%s|%x|%p\n\n",1588,'q',"Hello", 57790, &i);
     
     return (0);
 }
